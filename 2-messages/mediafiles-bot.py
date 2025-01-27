@@ -13,10 +13,11 @@ from aiogram import html
 from aiogram.utils.formatting import Text, Bold
 from datetime import datetime
 from aiogram.types import LinkPreviewOptions
+import pprint
 
 ################################################
 # Logging
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 ################################################
 
 ################################################
@@ -35,9 +36,19 @@ dp = Dispatcher()
 ################################################
 
 
-@dp.message(Command('start'))
-async def cmd_start(message: types.Message):
-    await message.answer('Well, hi!')
+# @dp.message(Command('test'))
+# async def cmd_test(message: types.Message):
+#     await message.answer_animation('CgACAgIAAxkBAAIBrGeV7GhM3klZUctn0GhU4hFGeMlUAAJtBQACr3PBSSLiYVVnGRSnNgQ')
+
+@dp.message(F.video)
+@dp.message(F.text)
+@dp.message(F.photo)
+@dp.message(F.animation)
+async def echo_gif(message: types.Message):
+    gifs = ['CgACAgIAAxkBAAIBrGeV7GhM3klZUctn0GhU4hFGeMlUAAJtBQACr3PBSSLiYVVnGRSnNgQ',]
+    [await message.answer_animation(gif) for gif in gifs]
+
+
 
 
 ################################################
